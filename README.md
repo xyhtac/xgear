@@ -4,7 +4,7 @@ Desinged to run under any environment, no dependecies requred by core.
 File::Copy used by filemanager module.
 
 See the [project page](http://code.pta.ru/xgear) for demonstration. 
-Try tools: admin:passwords123
+
 
 ## Deployment
 
