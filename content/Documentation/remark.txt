@@ -1,0 +1,11 @@
+# The program has prepared following useful information that you can use now:
+# %field - fully parsed and decoded form input data.
+# %cookie - parsed cookies.
+#
+# Also, you can place your own variables into the 'xgear.conf' file in order to
+# prevent troubles with the variable naming. All system and user-defined
+# variables are accessible in the %config hash.
+#
+# User-defined modules can be placed either here as a subroutines, or inside
+# special directory. (It is predefined in the "modules_dir" line of the "xgear.conf")
+# In case of using external files, filename will be used to identify your module.

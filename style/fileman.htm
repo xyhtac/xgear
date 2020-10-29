@@ -1,0 +1,295 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta http-equiv="Content-Language" content="ru">
+<link href="style.css" type=text/css rel=stylesheet>
+
+<script language="javascript" src="client.js"></script>
+
+<style type="text/css">
+	p.filemanager {font-family:arial; text-decoration:none; font-size:11; color:#000000};
+	p.heading {font-family:arial; text-decoration:none; font-size:9; color:#000000};
+	
+	input.description {width:220;border:0};
+	
+	a.filemanager {font-family:arial; text-decoration:none; font-size:11; color:#000000};
+	a.filemanager:hover {text-decoration:underline; color:#800000};
+</style>
+
+<script language="javascript">
+function setCookie(name, value) {
+var expires="Sunday, 11-Mar-2066, 23:59:59 GMT"
+var path="/"
+var domain=""
+var secure=""
+var curCookie = name + "=" + escape(value) +
+	((expires) ? "; expires=" + expires : "") +
+	((path) ? "; path=" + path : "") +
+	((domain) ? "; domain="+domain : "")+
+	((secure) ?  "; secure" : "")
+document.cookie=curCookie;
+};
+
+function proceed ($act) {
+	document.forms.toolbar.action.value=$act;
+	if ($act == "cut" || $act == "copy") {
+		var counter=0;
+		$top=document.forms.toolbar['item_count'].value;
+		$backUrl=document.forms.toolbar['item'].value;
+		var outStr="";
+		for ($i=1;$i<=$top;$i++) {
+			$checkbox='flag_'+$i;
+			if (document.forms.toolbar[$checkbox].checked) {
+				itemval=$backUrl+"/"+document.forms.toolbar[$checkbox].value;
+				outStr = outStr+"#"+itemval;
+				counter++;
+			};
+		};
+		setCookie("selection",outStr);
+		setCookie("action",$act);
+	};
+	document.forms.toolbar.submit();
+};
+
+function reconfig () {
+	$top=document.forms.toolbar['item_count'].value;
+	var outStr=""; var counter=0;
+	for ($i=1;$i<=$top;$i++) {
+		$checkbox='hide_'+$i;
+		if (document.forms.toolbar[$checkbox].checked) {
+			itemval=document.forms.toolbar[$checkbox].value;
+			outStr = outStr+itemval+",";
+			counter++;
+		};
+	};
+	document.forms.toolbar['hidden'].value=outStr;
+};
+
+
+function chdir ($dir) {
+	document.forms.toolbar.item.value=$dir;
+	document.forms.toolbar.submit();
+};
+
+function validate () {
+	var counter=0;
+	$top=document.forms.toolbar['item_count'].value;
+	$backUrl=document.forms.toolbar['item'].value;
+	var outStr="";
+	for ($i=1;$i<=$top;$i++) {
+		$checkbox='flag_'+$i;
+		if (document.forms.toolbar[$checkbox].checked) {
+			itemval=$backUrl+"/"+document.forms.toolbar[$checkbox].value;
+			outStr = outStr+"#"+itemval;
+			counter++;
+		};
+	};
+	document.forms.toolbar['selection'].value=outStr;
+	
+	
+	if ($backUrl != "/" && $backUrl != "" ) {
+		document.forms.toolbar['back_button'].disabled=false;
+	} else {
+		document.forms.toolbar['back_button'].disabled=true;
+	};
+	if (outStr) {
+		document.forms.toolbar['copy_button'].disabled=false;
+		document.forms.toolbar['cut_button'].disabled=false;
+		if (counter == 1) {
+			document.forms.toolbar['rename_button'].disabled=false;
+		} else {
+			document.forms.toolbar['rename_button'].disabled=true;
+		};
+		document.forms.toolbar['delete_button'].disabled=false;
+	} else {
+		document.forms.toolbar['copy_button'].disabled=true;
+		document.forms.toolbar['cut_button'].disabled=true;
+		document.forms.toolbar['rename_button'].disabled=true;
+		document.forms.toolbar['delete_button'].disabled=true;
+		document.forms.toolbar['paste_button'].disabled=true;
+	};
+	
+	if (document.forms.toolbar['clipboard'].value != "" && document.forms.toolbar['clipboard'].value != "clear" && document.forms.toolbar['clipboard'].value != " ") {
+		document.forms.toolbar['paste_button'].disabled=false;
+	} else {
+		document.forms.toolbar['paste_button'].disabled=true;
+	};
+	
+	if (document.forms.toolbar['clipboard'].value == "clear") {
+		setCookie("selection"," ");
+		setCookie("action"," ");
+	};
+};
+
+function getname() {
+	$newname=prompt('Enter new filename...','');
+	document.forms.toolbar['newname'].value=$newname;
+	proceed('rename');
+};
+
+function verify ($msg,$act) {
+	if (confirm($msg)) { proceed($act) };
+};
+
+</script>
+
+<title>XGear: Filemanager</title>
+</head>
+<body onload="validate()" topmargin="0" leftmargin="0">
+        
+<!--xg_mod:fileman-->
+
+<script language="javascript">
+	$msg="<!--xg_var:err-->";
+	if ($msg) { 
+		alert ($msg)
+	};
+</script>
+<form name="toolbar" method="post" action="kernel.cgi">
+
+	<!-- main CGI exchange containers.  -->
+		<input type="hidden" name="use_markup" value="fileman.htm">
+		<input type="hidden" name="action">
+		<input type="hidden" name="newname">
+		<input type="hidden" name="clipboard" value="<!--xg_var:clipboard-->">
+		<input type="hidden" name="selection">
+		<input type="hidden" name="item" value="<!--xg_var:item-->">
+		<input type="hidden" name="item_count" value="<!--xg_var:itemcount-->">
+		<input type="hidden" name="hidden" value="<!--xg_var:hidden-->">
+	<!-- end of data exchange containers -->
+	
+<table border="0" width="600" cellpadding="0" cellspacing="1" bgcolor="#808080">
+  <tr>
+    	<td width="100%" bgcolor="#C0C0C0">
+    	
+        <p align="left">
+    	
+   		<input type="button" name="copy_button" onclick="proceed('copy');" value="Copy">
+		<input type="button" name="cut_button" onclick="proceed('cut');" value="Cut">
+		<input type="button" name="paste_button" onclick="proceed('paste');" value="Paste">
+		&nbsp;&nbsp;
+		<input type="button" name="delete_button" onclick="verify('Please, confirm file removal...','delete');" value="Delete">
+		<input type="button" name="rename_button" onclick="getname(); this.disabled=true" value="Rename">
+		&nbsp;&nbsp;
+		<input type="button" name="back_button" onclick="chdir('<!--xg_var:parent-->');" value="Parent folder..">
+       &nbsp;&nbsp;&nbsp;
+       
+        </p>
+  		</td>
+  </tr>
+  <tr>
+    <td width="100%" bgcolor="#FFFFFF">
+    
+
+     <table border="0" width="600" cellspacing="1" cellpadding="0">
+      <tr>
+        <td width="20" bgcolor="#FFFFFF" align="center"> </td>
+        <td width="130" align="center" bgcolor="#C0C0C0">
+        	<p class="heading">
+            File name
+        	</p>
+        </td>
+        <td width="100" align="center" bgcolor="#C0C0C0">
+         	<p class="heading">
+            Size
+        	</p>
+        </td>
+        <td width="73" align="center" bgcolor="#C0C0C0">
+            <p class="heading">Changed
+        	</p>
+	     </td>
+        <td width="220" bgcolor="#C0C0C0" align="center">
+        	<p class="heading">
+            <font color="#000000">
+            Description</font>
+        	</p>
+        </td>
+        <td width="30" bgcolor="#C0C0C0" align="center">
+          	<p class="heading">
+            Hide
+          </p>
+        </td>
+      </tr>
+     </table>
+
+     <!--xg_sample:folders--> 
+     <table border="0" width="600" cellspacing="1" cellpadding="0">
+      <tr>
+        <td width="20" bgcolor="#C0C0C0" align="center"> <input type="checkbox" name="flag_<!--xg_var:counter-->" value="<!--xg_var:filename-->" onclick="validate()"></td>
+        <td width="130" align="left" bgcolor="#F9F9F9">
+        	<b><a style="margin-left:15" class="filemanager" href="#" onclick="chdir('<!--xg_var:url-->')">
+        	<img src="../art/icons/folder.gif" border=0>&nbsp; <!--xg_var:filename-->
+        	</a></b>
+        </td>
+        <td width="100" align="center" bgcolor="#F9F9F9">
+        	<p class="filemanager"><font color="#C0C0C0">&lt; folder &gt;</font></p>
+        </td>
+        <td width="73" align="center" bgcolor="#F9F9F9">
+	      	<p class="filemanager"><!--xg_var:date--></p>
+	     </td>
+        <td width="220" bgcolor="#E6E6E6" align="left">
+        	<p class="filemanager" align="center"> <input class="description" tabindex="<!--xg_var:counter-->" type=text value="<!--xg_var:caption-->" name="xginfo|<!--xg_var:filename-->"></p>
+        </td>
+        <td width="30" bgcolor="#E6E6E6" align="left">
+            <p align="center">
+        		<input <!--xg_var:ishidden--> type="checkbox" name="hide_<!--xg_var:counter-->" value="<!--xg_var:filename-->" onclick="reconfig()">
+            </p>
+        </td>
+      </tr>
+     </table>
+     <!--/xg_sample-->
+     
+     <!--xg_sample:files--> 
+     <table border="0" width="600" cellspacing="1" cellpadding="0">
+      <tr>
+        <td width="20" bgcolor="#C0C0C0" align="center"><input type="checkbox" name="flag_<!--xg_var:counter-->" value="<!--xg_var:filename-->" onclick="validate()"></td>
+        <td width="130" align="left" bgcolor="#F9F9F9">
+        	<p style="margin-left:15" class="filemanager"><img src="../art/icons/file.gif">&nbsp; <!--xg_var:filename--></p>
+        </td>
+        <td width="100" align="center" bgcolor="#F9F9F9">
+        	<p class="filemanager"><!--xg_var:size--></p>
+        </td>
+        <td width="73" align="center" bgcolor="#F9F9F9">
+        	<p class="filemanager"><!--xg_var:date--></p>
+        </td>
+        <td width="220" bgcolor="#E6E6E6" align="left">
+        	<p class="filemanager" align="center"> <input class="description" tabindex="<!--xg_var:counter-->" type=text value="<!--xg_var:caption-->" name="xginfo|<!--xg_var:filename-->"></p>
+        </td>
+        <td width="30" bgcolor="#E6E6E6" align="left">
+            <p align="center">
+        	<input <!--xg_var:ishidden--> type="checkbox" name="hide_<!--xg_var:counter-->" value="<!--xg_var:filename-->" onclick="reconfig()">
+            </p>
+        </td>
+      </tr>
+     </table>
+     <!--/xg_sample-->
+     
+     <table border="0" width="600" cellspacing="1" cellpadding="0">
+      <tr>
+        <td width="40" bgcolor="#FFFFFF" align="center"></td>
+        <td width="130" align="left" bgcolor="#FFFFFF"></td>
+        <td width="100" align="center" bgcolor="#FFFFFF"></td>
+        <td width="73" align="center" bgcolor="#FFFFFF"></td>
+        <td width="260" bgcolor="#E6E6E6" align="left" height="40">
+          <p align="right">
+       	  <input type=button value="Defaults" onclick="verify('Do you really want to reset folder settings?','reset');">&nbsp;
+            <input type=button value="Save Changes" onclick="proceed('change');">&nbsp;
+       	</p>
+        </td>
+      </tr>
+     </table>
+ 
+     
+   </td>
+  </tr>
+  <tr>
+    <td width="100%" bgcolor="#C0C0C0">
+    
+
+</form>
+
+<!--/xg_mod-->
+
+
+</body>
+

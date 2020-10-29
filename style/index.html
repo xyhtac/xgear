@@ -1,0 +1,193 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta http-equiv="Content-Language" content="ru">
+<link href="style.css" type=text/css rel=stylesheet>
+
+<script language="javascript">
+function mouse_over(){
+var agnt = navigator.userAgent.toLowerCase();
+var is_ie   = ((agnt.indexOf("msie") != -1) && (agnt.indexOf("opera") == -1));
+var is_nav  = ((agnt.indexOf('mozilla')!=-1) && (agnt.indexOf('spoofer')==-1)
+    && (agnt.indexOf('compatible') == -1) && (agnt.indexOf('opera')==-1)
+    && (agnt.indexOf('webtv')==-1) && (agnt.indexOf('hotjava')==-1));
+var nvers = navigator.appVersion.substring(0,4);
+var str = ''; var x,y,a;
+
+if(is_ie){
+    str=document.selection.createRange().text;
+}else if(is_nav){
+    str=document.getSelection();
+};
+if(str.length > 100 ) {	str = str.substr(0,100) };
+if (str) { document.forms.search.find.value=str };
+}; 
+
+function setCookie(name, value) {
+var expires="Sunday, 11-Mar-2066, 23:59:59 GMT"
+var path="/"
+var domain=""
+var secure=""
+var curCookie = name + "=" + escape(value) +
+	((expires) ? "; expires=" + expires : "") +
+	((path) ? "; path=" + path : "") +
+	((domain) ? "; domain="+domain : "")+
+	((secure) ?  "; secure" : "")
+document.cookie=curCookie;
+};
+function refresh (){
+history.go(0);
+};
+function logon() {
+	U=document.forms['logonform'].username.value;
+	P=document.forms['logonform'].password.value;
+	saveit(U,P);
+	refresh();
+};
+function logoff() {
+	U="",P="";
+	saveit(U,P);
+};
+function saveit(U,P) {
+	setCookie('xg_username',U);
+	setCookie('xg_password',P);
+};
+function newwindow(url,name) {
+	open(url,name, "width=620,height=400,status=yes,toolbar=no,menubar=no,scrollbars=yes");
+};
+
+</script>
+<title><!--xg_mod:title-->www.site.ru - <!--xg_var:title--><!--/xg_mod--></title>
+
+</head>
+<body topmargin="0" leftmargin="0">
+<table border="1" width="800" height="100%">
+  <tr>
+    <td width="100" height="100">
+      <p align="center"><font face="Arial"><b>Logo.</b></font><br>
+      <font size="1" face="Arial">site logo may be placed here</font></td>
+    <td width="700" height="100">
+      <p align="center"><font face="Arial"><b>Header. <br>
+      </b><font size="1">Site Header. Linkline goes here (&lt;!--xg_mod:header--&gt;&lt;!--/xg_mod--&gt;)</font></font></p>
+      <blockquote>
+        <p align="left">
+        <!--xg_mod:header-->
+			<font size="1" face="Arial">XG:/<!--xg_sample:links-->/ <b><a href="<!--xg_var:link-->"><!--xg_var:caption--></a></b><!--/xg_sample--></font>
+        <!--/xg_mod-->
+        </p>
+      </blockquote>
+    </td>
+  </tr>
+  <tr> 
+    <td height="100%" valign="top" rowspan="2">
+
+
+    
+    <!--xg_mod:calendar-->
+    <form name="calendar" action="" method="GET">
+    <input type="hidden" name="object" value="<!--xg_var:object-->">
+    <table border="1" width="100%">
+      <tr>
+        <td width="100%" bordercolorlight="#FFFFFF" bordercolordark="#FFFFFF">
+            <p><select onchange="document.forms['calendar'].submit()" style="font-family:arial; font-size:10" size="1" name="news_month">
+            <!--xg_sample:list--><option value="<!--xg_var:value-->" <!--xg_var:selected--> ><!--xg_var:caption--></option><!--/xg_sample-->
+            </select></p>
+        </td>
+      </tr>
+      <tr>
+        <td width="100%">
+          <table border="0" width="100%" cellspacing="1" cellpadding="0" bgcolor="#FFFFFF">
+            <tr>
+              <td width="14%" bgcolor="#C0C0C0" align="center"><font face="Arial" size="1">Mon</font></td>
+              <td width="14%" bgcolor="#C0C0C0" align="center"><font face="Arial" size="1">Tue</font></td>
+              <td width="14%" bgcolor="#C0C0C0" align="center"><font face="Arial" size="1">Web</font></td>
+              <td width="14%" bgcolor="#C0C0C0" align="center"><font face="Arial" size="1">Thu</font></td>
+              <td width="14%" bgcolor="#C0C0C0" align="center"><font face="Arial" size="1">Fri</font></td>
+              <td width="15%" bgcolor="#C0C0C0" align="center"><font face="Arial" size="1">Sat</font></td>
+              <td width="15%" bgcolor="#C0C0C0" align="center"><font face="Arial" size="1">Sun</font></td>
+            </tr>
+          </table>
+          <!--xg_sample:week-->
+          <table border="0" width="100%" cellspacing="1" cellpadding="0">
+            <tr>
+              <td width="14%" bgcolor="#EBEBEB" align="center">
+		<a class="<!--xg_var:style1-->" href="<!--xg_var:link1-->"><!--xg_var:caption1--></a></td>
+              <td width="14%" bgcolor="#EBEBEB" align="center">
+		<a class="<!--xg_var:style2-->" href="<!--xg_var:link2-->"><!--xg_var:caption2--></a></td>
+              <td width="14%" bgcolor="#EBEBEB" align="center">
+		<a class="<!--xg_var:style3-->" href="<!--xg_var:link3-->"><!--xg_var:caption3--></a></td>
+              <td width="14%" bgcolor="#EBEBEB" align="center">
+		<a class="<!--xg_var:style4-->" href="<!--xg_var:link4-->"><!--xg_var:caption4--></a></td>
+              <td width="14%" bgcolor="#EBEBEB" align="center">
+		<a class="<!--xg_var:style5-->" href="<!--xg_var:link5-->"><!--xg_var:caption5--></a></td>
+              <td width="15%" bgcolor="#EBEBEB" align="center">
+		<a class="<!--xg_var:style6-->" href="<!--xg_var:link6-->"><!--xg_var:caption6--></a></td>
+              <td width="15%" bgcolor="#EBEBEB" align="center">
+		<a class="<!--xg_var:style7-->" href="<!--xg_var:link7-->"><!--xg_var:caption7--></a></td>
+            </tr>
+          </table>
+          <!--/xg_sample-->
+        </td>
+      </tr>
+    </table>
+    </form>
+    <!--/xg_mod-->
+    
+    <!--xg_mod:menu-->
+    <table border="1" width="100%" cellspacing="1" cellpadding="0">
+      <tr>
+        <td width="100%" bordercolor="#FFFFFF" bordercolorlight="#FFFFFF" bordercolordark="#FFFFFF">&nbsp; <!--xg_var:folder--></td>
+      </tr>
+      <tr>
+        <td width="100%" bgcolor="#FFFFFF">
+            <!--xg_sample:files--><a href="<!--xg_var:link-->"><img border=0 width=10 height=10 src="file"><!--xg_var:caption--></a><br><!--/xg_sample-->  
+    		  <!--xg_sample:folders--><a href="<!--xg_var:link-->"><img border=0 width=10 height=10 src="folder"><!--xg_var:caption--></a><br><!--/xg_sample--> 
+        </td>
+      </tr>
+    </table>
+    <!--/xg_mod-->
+    
+    <!--xg_mod:logon-->
+    <form name="logonform">
+    <table border="1" width="100%" cellspacing="1" cellpadding="0">
+      <tr>
+        <td width="100%" bordercolor="#FFFFFF" bordercolorlight="#FFFFFF" bordercolordark="#FFFFFF">Manage.</td>
+      </tr>
+      <tr>
+        <td width="100%" bgcolor="#FFFFFF">
+          <!--xg_sample:login-->
+          <input class="logon" type="text" name="username" size="20">
+          <input class="logon" type="text" name="password" size="20"><br>
+          <input onclick="logon()" class="logon" type="button" value="Login"><br>
+        	<!--/xg_sample-->
+        	<!--xg_sample:logout-->
+        	<a href="#" onclick="newwindow('cgi-bin/kernel.cgi?use_markup=fileman.htm','filemanager')" class="menu">Manage files &gt;&gt;</a>
+
+          <input class="logon" type="button" onClick="logoff();refresh()" value="Logout">
+        	<!--/xg_sample-->
+        </td>
+      </tr>
+    </table>
+    </form>
+    <!--/xg_mod-->
+    
+    </td>
+    <td height="100%" valign="top"><!--xg_mod:content--> 
+    <p style="margin-left:20;margin-top:50">
+    <!--xg_sample:files--><a href="<!--xg_var:link-->"><img border=0 width=10 height=10 src="file"><!--xg_var:caption--></a><br><!--/xg_sample-->  
+    <!--xg_sample:folders--><a href="<!--xg_var:link-->"><img border=0 width=10 height=10 src="folder"><!--xg_var:caption--></a><br><!--/xg_sample-->  
+    <!--/xg_mod-->
+    </p>
+    </td>
+  </tr>
+  <tr> 
+    <td valign="top">
+      <p align="center">
+  </td>
+  </tr>
+</table>
+
+</body>
+
+</html>
