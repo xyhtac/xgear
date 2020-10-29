@@ -8,12 +8,19 @@ See the [project page](http://code.pta.ru/xgear) for demonstration.
 ## Deployment
 
 1\.  Upload files to you domain root directory.
+
 2\.  Allow Server Side Includes for .html files in your .htaccess
+
 3\.  Allow CGI for .cgi files
+
 4\.  Allow execution of .cgi scripts and cgi-bin folder
+
 5\.  Edit and run makeuser.cgi to extend users.txt with your account. 
+
 6\.  Chmod 600 users.txt
+
 7\.  Upload your files to /content
+
 8\.  Redesign your site by changing templates in /style
 
 ## Markup Tags
