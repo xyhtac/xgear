@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
 <meta http-equiv="Content-Language" content="ru">
-<link href="style.css" type=text/css rel=stylesheet>
+<link href="style/style.css" type=text/css rel=stylesheet>
 
 <script language="javascript">
 function mouse_over(){
@@ -62,18 +62,18 @@ function newwindow(url,name) {
 
 </head>
 <body topmargin="0" leftmargin="0">
-<table border="1" width="800" height="100%">
+<table border="1" width="900" height="100%">
   <tr>
-    <td width="100" height="100">
-      <p align="center"><font face="Arial"><b>Logo.</b></font><br>
-      <font size="1" face="Arial">site logo may be placed here</font></td>
+    <td width="250" height="100">
+      <p align="center"><b>Logo.</b><br>
+      site logo may be placed here</td>
     <td width="700" height="100">
-      <p align="center"><font face="Arial"><b>Header. <br>
-      </b><font size="1">Site Header. Linkline goes here (&lt;!--xg_mod:header--&gt;&lt;!--/xg_mod--&gt;)</font></font></p>
+      <p align="center"><b>Header. <br>
+      </b>Site Header. Linkline goes here (<!--xg_mod:header--><!--/xg_mod-->)</p>
       <blockquote>
         <p align="left">
         <!--xg_mod:header-->
-			<font size="1" face="Arial">XG:/<!--xg_sample:links-->/ <b><a href="<!--xg_var:link-->"><!--xg_var:caption--></a></b><!--/xg_sample--></font>
+			Home:/<!--xg_sample:links-->/ <b><a href="<!--xg_var:link-->"><!--xg_var:caption--></a></b><!--/xg_sample-->
         <!--/xg_mod-->
         </p>
       </blockquote>
@@ -90,7 +90,7 @@ function newwindow(url,name) {
     <table border="1" width="100%">
       <tr>
         <td width="100%" bordercolorlight="#FFFFFF" bordercolordark="#FFFFFF">
-            <p><select onchange="document.forms['calendar'].submit()" style="font-family:arial; font-size:10" size="1" name="news_month">
+            <p><select onchange="document.forms['calendar'].submit()" size="1" name="news_month">
             <!--xg_sample:list--><option value="<!--xg_var:value-->" <!--xg_var:selected--> ><!--xg_var:caption--></option><!--/xg_sample-->
             </select></p>
         </td>
@@ -141,8 +141,8 @@ function newwindow(url,name) {
       </tr>
       <tr>
         <td width="100%" bgcolor="#FFFFFF">
-            <!--xg_sample:files--><a href="<!--xg_var:link-->"><img border=0 width=10 height=10 src="file"><!--xg_var:caption--></a><br><!--/xg_sample-->  
-    		  <!--xg_sample:folders--><a href="<!--xg_var:link-->"><img border=0 width=10 height=10 src="folder"><!--xg_var:caption--></a><br><!--/xg_sample--> 
+            <!--xg_sample:files--><a href="<!--xg_var:link-->"><img border=0 width=10 height=10 src="art/icons/file.gif"><!--xg_var:caption--></a><br><!--/xg_sample-->  
+    		  <!--xg_sample:folders--><a href="<!--xg_var:link-->"><img border=0 width=10 height=10 src="art/icons/folder.gif"><!--xg_var:caption--></a><br><!--/xg_sample--> 
         </td>
       </tr>
     </table>
@@ -157,14 +157,14 @@ function newwindow(url,name) {
       <tr>
         <td width="100%" bgcolor="#FFFFFF">
           <!--xg_sample:login-->
-          <input class="logon" type="text" name="username" size="20">
-          <input class="logon" type="text" name="password" size="20"><br>
+          <input type="text" name="username" size="20">
+          <input type="text" name="password" size="20"><br>
           <input onclick="logon()" class="logon" type="button" value="Login"><br>
         	<!--/xg_sample-->
         	<!--xg_sample:logout-->
         	<a href="#" onclick="newwindow('cgi-bin/kernel.cgi?use_markup=fileman.htm','filemanager')" class="menu">Manage files &gt;&gt;</a>
-
-          <input class="logon" type="button" onClick="logoff();refresh()" value="Logout">
+<br>
+          <input type="button" onClick="logoff();refresh()" value="Logout">
         	<!--/xg_sample-->
         </td>
       </tr>
@@ -175,8 +175,8 @@ function newwindow(url,name) {
     </td>
     <td height="100%" valign="top"><!--xg_mod:content--> 
     <p style="margin-left:20;margin-top:50">
-    <!--xg_sample:files--><a href="<!--xg_var:link-->"><img border=0 width=10 height=10 src="file"><!--xg_var:caption--></a><br><!--/xg_sample-->  
-    <!--xg_sample:folders--><a href="<!--xg_var:link-->"><img border=0 width=10 height=10 src="folder"><!--xg_var:caption--></a><br><!--/xg_sample-->  
+    <!--xg_sample:files--><a href="<!--xg_var:link-->"><img border=0 width=10 height=10 src="art/icons/file.gif"><!--xg_var:caption--></a><br><!--/xg_sample-->  
+    <!--xg_sample:folders--><a href="<!--xg_var:link-->"><img border=0 width=10 height=10 src="art/icons/folder.gif"><!--xg_var:caption--></a><br><!--/xg_sample-->  
     <!--/xg_mod-->
     </p>
     </td>
