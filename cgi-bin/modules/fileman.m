@@ -6,7 +6,6 @@ sub fileman {
 	&parse_index("$config{'content_dir'}/$field{'item'}",1);
 	&trigger;
 	
-
 	$markup=~s/<!--xg_var:hidden-->/$info{'xg_hide'}/gie;
 	$markup=~s/<!--xg_var:parent-->/&find_parent_dir/gie;
 	$markup=~s/<!--xg_var:item-->/$field{'item'}/gie;
@@ -80,7 +79,6 @@ sub info_alter {
 	$filecontent.="\nxg_hide\=$field{'hidden'}";
 	$filecontent=~ s/\n{4,}//g;
 	
-
 	unlink ("$config{'content_dir'}/$field{'item'}/$config{'index_filename'}");
 	open (INFO,">$config{'content_dir'}/$field{'item'}/$config{'index_filename'}");
 		print INFO $filecontent;
@@ -88,15 +86,6 @@ sub info_alter {
 };
 
 
-# Логическая функция выбора текущего действия. Выбор действия производится
-# исходя из содержимого элемента 'action' хэша %field.
-#
-# Подразумевается также наличие скаляров $cookie{'selection'} и
-# $field{'selection'}, содержащих список элементов в буфере обмена
-# и список выделенных на данный момент элементов соответственно,
-# а также $field{'item'} - путь к активной папке.
-# В случае отсутствия в скалярах подходящей информации, циклы
-# foreach не выполняются, к аварийному заваршению программы это не приводит.
 
 sub trigger {
 	@clipboard=split(/#/,$cookie{'selection'});
@@ -104,20 +93,11 @@ sub trigger {
 
 	if ($field{'action'} eq "paste") {
 
-		# В случае выполнения команды paste, программа приступает
-		# к копированию или перемещению (копированию и удалению 
-		# источника), используя данные о содержимом буфера обмена
-		# ($cookie{'selection'}).
 
 		foreach (@clipboard) {
 			@parts=split(/\//,$_);
 			$filename=$parts[$#parts];
 			
-			# Следующий блок отвечает за подбор уникального имени
-			# для нового файла, если заданное ранее имя уже 
-			# существует, путем добавления к имени файла строки 
-			# "Copy_". 
-
 			rebuild:
 			$new_url=&secure("$config{'content_dir'}/$field{'item'}/$filename");
 			if (-e $new_url && $filename) {
@@ -125,59 +105,26 @@ sub trigger {
 				goto "rebuild";
 			};
 			
-			# Перед выполнением каких-либо действий, убеждаемся в 
-			# существовании запрошенного элемента (файла или папки - 
-			# на данный момент безразлично) и в том, что полученный 
-			# путь не является ссылкой на вышестоящую папку.
 
 			if (-e "$config{'content_dir'}/$_" && $filename) {
 				if ($cookie{'action'} eq "copy") {
 					unless (-d "$config{'content_dir'}/$_") {
-
-						# Копируем файл или сообщаем об
-						# ошибке. Копирование производим
-						# с помощью функции copy() 
-						# модуля File/copy.pm
-
 						copy ("$config{'content_dir'}/$_",$new_url) or die "Copy failed: $!";
 					} else {
-						
-						# Копируем папку со всеми вложенными
-						# элементами с помощью функции &copy_tree
-
 						&copy_tree("$config{'content_dir'}/$_",$new_url);
 					};
 				} elsif ($cookie{'action'} eq "cut") {
 					unless (-d "$config{'content_dir'}/$_") {
-
-						# Перемещаем файл или сообщаем об
-						# ошибке. Перемещение производим
-						# с помощью функции move() 
-						# модуля File/copy.pm
-
 						move ("$config{'content_dir'}/$_",$new_url) or die "Move failed: $!";
 					} else {
 						
-						# Перемещаем папку.
-						# Шаг1. копируем папку со всеми вложенными
-						# элементами с помощью функции &copy_tree
-
 						&copy_tree("$config{'content_dir'}/$_",$new_url);
-
-						# Шаг2. удаляем исходную папку со всеми вложенными
-						# элементами с помощью функции &del_tree
-
 						&del_tree("$config{'content_dir'}/$_");
 					};
 				};
 			};
 		};
 
-		# По завершении работы программы, необходимо сбросить значения буфера обмена
-		# в cookie браузера. Этим занимается клиентская часть программы (javascript),
-		# поэтому присваиваем значение clear переменной $cookie{'selection'} - 
-		# В дальнейшем это значение возвращается клиенту подпрограммой обработки html.
- 
 		$cookie{'selection'}="clear";
 	};
 	if ($field{'action'} eq "delete") {
@@ -185,21 +132,10 @@ sub trigger {
 			@parts=split(/\//,$_);
 			$filename=$parts[$#parts];
 			
-			# При удалении файла используем список, переданный в строке запроса
-			# $field{'selection'}. Проверяем существование запрошенного элемента
-			# и правильность запроса.
-
 			if (-e "$config{'content_dir'}/$_" && $filename) {
 				if (!-d "$config{'content_dir'}/$_") {
-					
-					# удаляем файл средствами встроенной в Perl
-					# функции unlink.
-
 					unlink ("$config{'content_dir'}/$_");
 				} else {
-					# Удаляем папку со всеми вложенными
-					# элементами с помощью функции &del_tree
-
 					&del_tree("$config{'content_dir'}/$_");
 				};
 			};
@@ -210,7 +146,6 @@ sub trigger {
 	if ($field{'action'} eq "rename") {
 		@parts=split(/\//,$selection[$#selection]);
 		$filename=$parts[$#parts];
-
 		$source=&secure($filename);
 		$destination=&secure($field{'newname'});
 		$url=&secure("$config{'content_dir'}/$field{'item'}");
@@ -248,20 +183,17 @@ sub trigger {
 	};
 
 
-# В случае возникновения ошибок, программа возвращается
-# сюда.
+# Г‚ Г±Г«ГіГ·Г ГҐ ГўГ®Г§Г­ГЁГЄГ­Г®ГўГҐГ­ГЁГї Г®ГёГЁГЎГ®ГЄ, ГЇГ°Г®ГЈГ°Г Г¬Г¬Г  ГўГ®Г§ГўГ°Г Г№Г ГҐГІГ±Гї
+# Г±ГѕГ¤Г .
 
 action_abort:
 };
 
 sub secure {
 	
-	# Подпрограмма исключения из строки запроса ненужных
-	# и опасных символов. На входе\выходе скаляр $string.
-
 	local ($string) = @_ if @_;
 	$string=~s/\/{2,}/\//g;
-	$string=~s/[\!\~\@\$\%\^\&\*\(\)\=\+\"\№\;\:\?\\]//g;
+	$string=~s/[\!\~\@\$\%\^\&\*\(\)\=\+\"\В№\;\:\?\\]//g;
 	return $string;
 };
 
