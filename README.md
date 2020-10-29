@@ -43,7 +43,7 @@ See the [project page](http://code.pta.ru/xgear) for demonstration.
 
 ## License
 
-xgear is licensed under the [GPLv3](http://choosealicense.com/licenses/gpl-3.0) license for all open source applications.
+xgear is licensed under the [MIT](https://www.mit-license.org/) license for all open source applications.
 
 ## Bugs and feature requests
 
