@@ -26,7 +26,7 @@ $config{'filename_length'}=32;
 &check_request;
 &parse_html;
 
-# The program has prepared following useful information that you can use now:
+# The core has prepared following useful information that you can use now:
 # %field - fully parsed and decoded form input data.
 # %cookie - parsed cookies.
 #
@@ -340,7 +340,6 @@ sub make_html {
 
 sub case_shift {
 	local($string)=@_ if @_;
-	$string=~tr/ÀÁÂÃÄÅ¨ÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÜÛÚÝÞß/àáâãäå¸æçèéêëìíîïðñòóôõö÷øùüûúýþÿ/;
 	$string=~tr/ABCDEFGHIJKLMNOPQRSTUVWXYZ/abcdefghijklmnopqrstuvwxyz/;
 	return $string;
 };
