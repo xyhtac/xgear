@@ -7,6 +7,12 @@ See the [project page](http://code.pta.ru/xgear) for demonstration.
 
 ## Deployment
 
+0\.  Make sure that include_module and cgid_module are both enabled in httpd.conf
+```
+  LoadModule include_module modules/mod_include.so
+  LoadModule cgid_module modules/mod_cgid.so
+```
+
 1\.  Upload files to you domain root directory.
 
 2\.  Allow Server Side Includes for .html files in your .htaccess
