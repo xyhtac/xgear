@@ -18,19 +18,19 @@ See the [project page](http://code.pta.ru/xgear) for demonstration.
 
 ## Markup Tags
 
-1. ```html <!--xg_mod:[module name]--> [module markup] <!--/xg_mod-->```
+1. ``` <!--xg_mod:[module name]--> [module markup] <!--/xg_mod--> ```
 
   These tags are used to cut bits of information from page, run the defined module
   and send previously extracted data to module as an argument. The extracted text 
   will then be replaced by the module output.
 	
-2. ```html<!--xg_sample:[sample name]--> [sample markup] <!--/xg_sample-->```
+2. ``` <!--xg_sample:[sample name]--> [sample markup] <!--/xg_sample--> ```
 
   If the specified mudule needs to reuse part of markup code while it iterates 
   through multiple items, use the tag structure above. In case if module uses 
   only one sample, you can use arbitrary name.
   
-3. ```html<!--xg_var:[variable name]-->```
+3. ``` <!--xg_var:[variable name]--> ```
 	
   Variable tag lets you insert arbitrary variable inside xg_mod markup.
 
