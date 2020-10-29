@@ -3,19 +3,20 @@ Doomsday file-based CMS on pure Perl.
 Desinged to run under any environment, no dependecies requred by core.
 File::Copy used by filemanager module.
 
-See the [project page](http://code.pta.ru/xgear) for demonstration.
+See the [project page](http://code.pta.ru/xgear) for demonstration. 
+Try tools: admin:passwords123
 
 ## Deployment
 
-0\.  Make sure that include_module and cgid_module are both enabled in httpd.conf
+1\.  Make sure that include_module and cgid_module are both enabled in httpd.conf
 ```
   LoadModule include_module modules/mod_include.so
   LoadModule cgid_module modules/mod_cgid.so
 ```
 
-1\.  Upload files to your domain root directory.
+2\.  Upload files to your domain root directory.
 
-2\.  Allow Server Side Includes for .html files and CGI-script for .cgi files in your .htaccess
+3\.  Allow Server Side Includes for .html files and CGI-script for .cgi files in your .htaccess
 ```
 Options +Includes +ExecCGI
 AddType text/html .html
@@ -24,11 +25,9 @@ AddHandler cgi-script .cgi
 Require all granted
 ```
 
-3\.  Allow execution of .cgi scripts and cgi-bin folder
+4\.  Allow execution of .cgi scripts and cgi-bin folder
 
-4\.  Edit and run makeuser.cgi to extend users.txt with your account. 
-
-5\.  Chmod 600 users.txt
+5\.  Edit and run makeuser.cgi to extend users.txt with your account, then CHMOD 644 users.txt
 
 6\.  Upload your files to /content
 
