@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/perl -w
 use File::Copy;
 
 $config{'markup_dir'}="../style";
@@ -340,7 +340,7 @@ sub make_html {
 
 sub case_shift {
 	local($string)=@_ if @_;
-	$string=~tr/ÀÁÂÃÄÅ¨ÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÜÛÚİŞß/àáâãäå¸æçèéêëìíîïğñòóôõö÷øùüûúışÿ/;
+	$string=~tr/Ã€ÃÃ‚ÃƒÃ„Ã…Â¨Ã†Ã‡ÃˆÃ‰ÃŠÃ‹ÃŒÃÃÃÃÃ‘Ã’Ã“Ã”Ã•Ã–Ã—Ã˜Ã™ÃœÃ›ÃšÃÃÃŸ/Ã Ã¡Ã¢Ã£Ã¤Ã¥Â¸Ã¦Ã§Ã¨Ã©ÃªÃ«Ã¬Ã­Ã®Ã¯Ã°Ã±Ã²Ã³Ã´ÃµÃ¶Ã·Ã¸Ã¹Ã¼Ã»ÃºÃ½Ã¾Ã¿/;
 	$string=~tr/ABCDEFGHIJKLMNOPQRSTUVWXYZ/abcdefghijklmnopqrstuvwxyz/;
 	return $string;
 };
